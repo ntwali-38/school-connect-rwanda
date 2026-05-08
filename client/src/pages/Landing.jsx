@@ -7,6 +7,9 @@ function Landing() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [schools, setSchools] = useState([]);
+  const [location, setLocation] = useState('');
+  const [minFee, setMinFee] = useState('');
+  const [maxFee, setMaxFee] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -61,7 +64,6 @@ function Landing() {
         <div className="hero-circle circle-bl"></div>
 
         <div className="hero-content">
-          <div className="badge-pill">Rwanda's #1 School Discovery Platform</div>
           <h1 style={{ textShadow: '0 2px 12px rgba(0,0,0,0.3)' }}>Find Your Future School in <span className="accent-blue">Rwanda</span></h1>
           <p className="subtitle">
             Browse 500+ schools across 30 districts. Compare fees, programs,
@@ -75,17 +77,37 @@ function Landing() {
 
           <div className="hero-search-bar">
             <div className="search-group">
-              <input type="text" placeholder="Search by school name..." />
+              <input
+                type="text"
+                placeholder="District or location..."
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
             </div>
             <div className="search-divider"></div>
             <div className="search-group">
-              <input type="text" placeholder="District or location..." />
+              <input
+                type="number"
+                placeholder="Min Fee (RWF)..."
+                value={minFee}
+                onChange={(e) => setMinFee(e.target.value)}
+              />
             </div>
             <div className="search-divider"></div>
             <div className="search-group">
-              <input type="number" placeholder="Max fee (RWF)..." />
+              <input
+                type="number"
+                placeholder="Max Fee (RWF)..."
+                value={maxFee}
+                onChange={(e) => setMaxFee(e.target.value)}
+              />
             </div>
-            <button className="btn-search-hero">Search</button>
+            <button
+              className="btn-search-hero"
+              onClick={() => navigate(`/schools?location=${location}&minFee=${minFee}&maxFee=${maxFee}`)}
+            >
+              Search
+            </button>
           </div>
 
           <div className="hero-stats-bar">
